@@ -1,0 +1,216 @@
+:root {
+  --page: #eef1f7;
+  --surface: #ffffff;
+  --ink: #1e2340;
+  --muted: #69708f;
+  --line: #e1e5f0;
+  --accent: #3d4bd6;
+  --fr-tint: #f1f2ff;
+  --marker: #ffe066;
+  --danger: #c0392b;
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #12152a;
+    --surface: #1a1e3a;
+    --ink: #e8eaf6;
+    --muted: #9aa1c4;
+    --line: #2a2f55;
+    --accent: #8d98ff;
+    --fr-tint: #20254a;
+    --marker: rgba(255, 224, 102, 0.34);
+    --danger: #ff8a80;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font: 15px/1.5 var(--sans);
+}
+
+.muted { color: var(--muted); }
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+/* ---------- En-tête ---------- */
+
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px 24px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 32px 24px 16px;
+}
+
+h1 {
+  margin: 0;
+  font: 700 32px/1.1 var(--serif);
+  letter-spacing: -0.01em;
+}
+
+#count { margin: 6px 0 0; }
+
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+input[type="search"] {
+  width: 280px;
+  max-width: 100%;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+}
+
+.btn {
+  padding: 9px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  font: 600 14px/1 var(--sans);
+  cursor: pointer;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-quiet { background: transparent; border-color: transparent; color: var(--muted); }
+.btn-quiet:hover { border-color: transparent; color: var(--danger); }
+
+input:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---------- Tableau ---------- */
+
+main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px 64px;
+}
+
+.wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+table {
+  width: 100%;
+  min-width: 860px;
+  border-collapse: collapse;
+}
+
+th {
+  position: sticky;
+  top: 0;
+  padding: 12px 16px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  text-align: left;
+}
+
+td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+tbody tr:last-child td { border-bottom: 0; }
+
+.c-word { width: 15%; }
+.c-sentence { width: 33%; }
+.c-actions { width: 72px; padding-left: 4px; padding-right: 8px; }
+
+/* Colonnes françaises : même teinte en-tête et cellules pour former une bande. */
+th.fr, td.fr { background: var(--fr-tint); }
+
+/* Anglais : typographie de livre. Français : sans-serif, plus discret. */
+td.word {
+  font: 700 19px/1.35 var(--serif);
+  overflow-wrap: anywhere;
+}
+td.sentence {
+  font: 17px/1.6 var(--serif);
+}
+td.fr {
+  font-family: var(--sans);
+  font-size: 15px;
+}
+td.sentence.fr { line-height: 1.55; }
+
+mark {
+  padding: 0 0.15em;
+  border-radius: 3px;
+  background: var(--marker);
+  color: inherit;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.missing { color: var(--muted); }
+
+/* ---------- Actions ---------- */
+
+td.actions {
+  white-space: nowrap;
+  text-align: right;
+}
+
+.icon-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--muted);
+  font: 16px/1 var(--sans);
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 0;
+}
+tr:hover .icon-btn,
+tr:focus-within .icon-btn { opacity: 1; }
+@media (hover: none) { .icon-btn { opacity: 1; } }
+.icon-btn:hover { background: var(--page); color: var(--accent); }
+.icon-btn.delete:hover { color: var(--danger); }
+.icon-btn[disabled] { cursor: progress; }
+
+/* ---------- États vides ---------- */
+
+.empty {
+  max-width: 460px;
+  margin: 12vh auto 0;
+  text-align: center;
+}
+.empty-title { margin: 0 0 8px; font: 700 22px/1.2 var(--serif); }
+.nomatch { padding: 24px; text-align: center; }
+
+[hidden] { display: none !important; }

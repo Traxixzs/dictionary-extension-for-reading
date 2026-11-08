@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mon dico</title>
+  <link rel="stylesheet" href="list.css">
+</head>
+<body>
+  <header class="top">
+    <div class="title">
+      <h1>Mon dico</h1>
+      <p id="count" class="muted" aria-live="polite"></p>
+    </div>
+    <div class="tools">
+      <input id="q" type="search" placeholder="Chercher un mot ou une phrase" aria-label="Chercher dans le dico">
+      <button id="export" type="button" class="btn">Exporter en CSV</button>
+      <button id="clear" type="button" class="btn btn-quiet">Tout effacer</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="empty" class="empty" hidden>
+      <p class="empty-title">Ton dico est vide.</p>
+      <p class="muted">Surligne un mot ou une expression sur une page : le bouton « Ajouter » apparaît juste en dessous de la sélection.</p>
+    </div>
+
+    <div id="wrap" class="wrap" hidden>
+      <table>
+        <thead>
+          <tr>
+            <th class="c-word">Mot</th>
+            <th class="c-sentence">Phrase</th>
+            <th class="c-word fr">Traduction du mot</th>
+            <th class="c-sentence fr">Traduction de la phrase</th>
+            <th class="c-actions"><span class="sr">Actions</span></th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <p id="nomatch" class="muted nomatch" hidden>Aucun résultat pour cette recherche.</p>
+    </div>
+  </main>
+
+  <script src="list.js"></script>
+</body>
+</html>
